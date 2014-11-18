@@ -25,12 +25,14 @@
     
     self.videoGameArray = @[@{@"name" : @"Monument Valley", @"platform" : @"iOS", @"genre" : @"Puzzle"}, @{@"name" : @"Space Age", @"platform" : @"iOS", @"genre" : @"Adventure"}, @{@"name" : @"Far Cry 4", @"platform" : @"PS4", @"genre" : @"Shooter"}, @{@"name" : @"Sunset Overdrive", @"platform" : @"Xbox One", @"genre" : @"Action"}, @{@"name" : @"Borderlands: The Pre-Sequel", @"platform" : @"PC", @"genre" : @"Shooter"}];
     
+    NSInteger index = 0;
+    
     //Get the default Realm, you only need to do this once per thread
     self.realm = [RLMRealm defaultRealm];
     
     [self.realm beginWriteTransaction];
     
-    NSInteger index = 0;
+    [self.realm deleteAllObjects];
     
     //Create objects
     for (VideoGame *videoGame in self.videoGameArray)
