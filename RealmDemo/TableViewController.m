@@ -25,8 +25,6 @@
     
     self.videoGameArray = @[@{@"name" : @"Monument Valley", @"platform" : @"iOS", @"genre" : @"Puzzle"}, @{@"name" : @"Space Age", @"platform" : @"iOS", @"genre" : @"Adventure"}, @{@"name" : @"Far Cry 4", @"platform" : @"PS4", @"genre" : @"Shooter"}, @{@"name" : @"Sunset Overdrive", @"platform" : @"Xbox One", @"genre" : @"Action"}, @{@"name" : @"Borderlands: The Pre-Sequel", @"platform" : @"PC", @"genre" : @"Shooter"}];
     
-    NSInteger index = 0;
-    
     //Get the default Realm, you only need to do this once per thread
     self.realm = [RLMRealm defaultRealm];
     
@@ -41,7 +39,6 @@
         newVideoGame.name = [videoGame valueForKey:@"name"];
         newVideoGame.platform = [videoGame valueForKey:@"platform"];
         newVideoGame.genre = [videoGame valueForKey:@"genre"];
-        newVideoGame.index = index++;
         [self.realm addObject:newVideoGame];
     }
     
@@ -60,7 +57,8 @@
 {
     VideoGameCell *gameCell = [tableView dequeueReusableCellWithIdentifier:@"GameCell" forIndexPath:indexPath];
     
-    VideoGame *videoGame = [[VideoGame objectsWhere:[NSString stringWithFormat:@"index = %ld", (long)indexPath.row]] firstObject];
+    RLMResults *videoGames = [VideoGame allObjects];
+    VideoGame *videoGame = videoGames[indexPath.row];
     gameCell.nameLabel.text = videoGame.name;
     gameCell.platformLabel.text = [NSString stringWithFormat:@"(%@)", videoGame.platform];
     

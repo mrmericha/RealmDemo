@@ -13,7 +13,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *platform;
 @property (nonatomic, strong) NSString *genre;
-@property (nonatomic, assign) NSInteger index;
 
 @end
 
